@@ -122,13 +122,13 @@ _tls_generate_certs() {
 }
 
 INFO "Generating certs"
-_tls_generate_certs /certs
+_tls_generate_certs $DOCKER_TLS_CERTDIR
 
 INFO "Starting supervisor"
 /usr/bin/dockerd \
     --host=unix:///var/run/docker.sock \
     --host=tcp://0.0.0.0:2376 \
     --tlsverify \
-    --tlscacert /certs/server/ca.pem \
-    --tlscert /certs/server/cert.pem \
-    --tlskey /certs/server/key.pem
+    --tlscacert $DOCKER_TLS_CERTDIR/server/ca.pem \
+    --tlscert  $DOCKER_TLS_CERTDIR/server/cert.pem \
+    --tlskey  $DOCKER_TLS_CERTDIR/server/key.pem
