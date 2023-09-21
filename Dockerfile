@@ -5,7 +5,7 @@
 ARG UBUNTU_RELEASE=22.04
 FROM ubuntu:${UBUNTU_RELEASE}
 
-LABEL maintainer "https://github.com/ehfd"
+LABEL maintainer "https://github.com/max3li"
 
 ARG UBUNTU_RELEASE
 
@@ -16,8 +16,7 @@ RUN apt-get update && apt-get install -y \
         curl \
         iptables \
         git \
-        gnupg \
-        supervisor && \
+        gnupg && \
     rm -rf /var/lib/apt/list/*
 
 # NVIDIA Container Toolkit & Docker
@@ -28,11 +27,9 @@ RUN distribution=$(. /etc/os-release;echo $ID$VERSION_ID) && \
     rm -rf /var/lib/apt/list/*
 
 COPY modprobe startup.sh /usr/local/bin/
-COPY supervisor/ /etc/supervisor/conf.d/
 COPY logger.sh /opt/bash-utils/logger.sh
 
 RUN chmod +x /usr/local/bin/startup.sh /usr/local/bin/modprobe
 VOLUME /var/lib/docker
 
 ENTRYPOINT ["startup.sh"]
-CMD ["sh"]
