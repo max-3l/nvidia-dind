@@ -5,7 +5,7 @@
 ARG UBUNTU_RELEASE=22.04
 FROM ubuntu:${UBUNTU_RELEASE}
 
-LABEL maintainer "https://github.com/max3li"
+LABEL maintainer "https://github.com/max-3l"
 
 ARG UBUNTU_RELEASE
 
